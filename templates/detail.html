@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ doc.judul }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+    <div class="header-inner">
+        <!-- kiri -->
+        <div class="header-left">
+            <img src="{{ url_for('static', filename='img/header_sipenta.png') }}"
+                alt="SIPENTA"
+                class="header-logo">
+        </div>
+
+        <!-- kanan -->
+        <nav class="header-nav">
+            <a href="{{ url_for('index') }}" class="nav-link">
+                Beranda
+            </a>
+            <a href="#" class="nav-link">
+                Tentang
+            </a>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== CONTENT ===== -->
+<div class="container detail-container">
+    <!-- ===== BREADCRUMBS ===== -->
+    <div class="breadcrumb">
+        <a href="{{ url_for('index', query=query) }}">
+            Laman Pencari
+        </a>
+        <span>/</span>
+        <span class="breadcrumb-current">{{ doc.judul }}</span>
+    </div>
+
+    <!-- JUDUL -->
+    <h1 class="detail-title">
+        {{ doc.judul.upper() }}
+    </h1>
+
+    <!-- PENULIS -->
+    <p class="detail-author">
+        {{ doc.nama_mahasiswa }} - {{ doc.nim }} - {{doc.tahun}}
+    </p>
+
+    <!-- KATA KUNCI -->
+    {% if doc.kata_kunci %}
+    <div class="detail-section">
+        <p class="section-label">Kata Kunci</p>
+        <p class="section-content keyword-text">
+            {{ doc.kata_kunci }}
+        </p>
+    </div>
+    {% endif %}
+
+    <!-- ABSTRAK -->
+    <div class="detail-section">
+        <p class="section-label">Abstrak</p>
+        <p class="section-content abstrak-text">
+            {{ doc.abstrak | safe }}
+        </p>
+    </div>
+
+    <!-- BUTTON PDF -->
+    {% if doc.pdf %}
+    <a href="{{ doc.pdf.url }}" target="_blank" class="pdf-btn">
+        📄 PDF
+    </a>
+    {% endif %}
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p>
+            © {{ 2025 }} <b>SIPENTA</b> — Sistem Pencarian Tugas Akhir
+        </p>
+        <p class="footer-sub">
+            Program Studi Informatika • Universitas Udayana
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

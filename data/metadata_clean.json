@@ -1,0 +1,110 @@
+{
+  "DOC_00000": {
+    "nim": "1808561071",
+    "nama_mahasiswa": "KADEK VINCKY SEDANA",
+    "judul": "SISTEM PENGAMANAN DATA DENGAN GRONSFELD CIPHER DAN STEGANOGRAFI END OF FILE",
+    "abstrak": "Informasi adalah sekumpulan data atau fakta yang diorganisasi atau diolah dengan cara tertentu sehingga mempunyai arti bagi penerima maupun pengguna. Data maupun informasi merupakan hal yang sangat penting untuk dijaga keamanan atau kerahasiannya agar pihak-pihak yang tidak berkepentingan tidak bisa mengetahui data maupun informasi tersebut.Sistem Pengamanan Data dengan Gronsfeld Cipher dan Steganografi End Of File ini dikembangkan dengan menggunakan algoritma Gronsfeld Cipher yang dikombinasikan dengan metode Steganografi End Of File. Sistem ini berbasis desktop yang dibuat dengan tujuan untuk meningkatkan keamanan data pada informasi-informasi rahasia sehingga pihak yang tidak berkepentingan tidak dapat mengetahui isi dari data tersebut. Sistem ini diharapkan dapat menjadi solusi untuk mencegah pencurian informasi penting oleh pihak yang tidak berkepentingan. Dari hasil pengujian yang telah dilakukan, sistem yang dikembangkan dapat menerima masukan, memproses masukan dan menghasilkan keluaran sesuai dengan yang diharapkan. Pengujian kualitas citra hasil penyisipan mendapatkan rata-rata nilai PSNR 66.0987 dB yang di mana ini dapat dikatakan baik karena sebuah citra dapat dikatakan baik jika memilki nilai PSNR di atas 40 dB. Kata Kunci: Kriptografi, Steganografi, Gronsfeld Cipher, Citra Digital, Keamanan Data",
+    "tahun": 2022,
+    "txt_path": "txt_docs/DOC_00000.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1e3myXDG8YM2mMXBTf2GFDc-8nG0DjVc7/view"
+    }
+  },
+  "DOC_00001": {
+    "nim": "1908561023",
+    "nama_mahasiswa": "PIJAR CANDRA MAHATAGANDHA",
+    "judul": "PEMILIHAN TOPIK POSITIF UNTUK PODCAST MENGGUNAKAN NAIVE BAYES DAN LDA",
+    "abstrak": "Podcast atau “play-on-demand” dan “broadcast” merupakan salah satu media informasi yang memiliki peminat yang tinggi dan dapat memberi pengaruh yang besar terhadap opini pendengarnya. Podcaster terbiasa mencari referensi topik dari trending topic Twitter yang merupakan salah satu aplikasi berbasis pesan teks dengan pengguna terbanyak. Namun, penggunaan topik yang diambil dari trending topic Twitter tidak selalu memiliki sentimen positif dan pantas dibahas.Berdasarkan penelitian “Isu Pornografi dan Penyebarannya di Twitter (Kasus Video Asusila Mirip Artis)”, Twitter memiliki peran besar dalam penyebaran pornografi yang ditunjukan dengan deretan trending topic teratas Twitter yang mengandung konten pornografi baik video, foto, dan teks (Christiany, 2020). Masalah ini dapat diatasi dengan menggunakan metode klasifikasi naïve bayes dan pemodelan topik mengggunakan LDA. Penelitian ini menggunakan metode analisis deskriptif dimana data akan direpresentasikan secara kuantitatif yakni dalam bentuk akurasi yang dihasilkan model naive bayes dan perplexity dan coherence score yang dihasilkan oleh model pemodelan topik LDA. Model naive bayes yang dibuat menunjukan akurasi pelatihan sebesar 91,2% dan akurasi pengujian sebesar 86,2% untuk model tanpa hyperparameter tuning dan akurasi pelatihan sebesar 92,3% dan akurasi pengujian sebesar 87,3% untuk model dengan hyperparameter tuning. Model LDA yang dibuat menunjukan coherence score sebesar 0.502 dan perplexity sebesar 190.419 untuk model tanpa hyperparameter tuning dan coherence score sebesar 0.515 dan perplexity sebesar 194.180 untuk model dengan hyperparameter tuning. Kata kunci: podcast, analisis sentimen, pemodelan topik, naïve bayes, LDA",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00001.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1e955Jb_krkJmrq7-Od5JOK7vZuSgmod2/view"
+    }
+  },
+  "DOC_00002": {
+    "nim": "1908561081",
+    "nama_mahasiswa": "NI MADE ALISYA PUTRI HAPSARI",
+    "judul": "SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN JALUR MENGGUNAKAN METODE K-NEAREST NEIGHBOR DI PROGRAM STUDI INFORMATIKA UNIVERSITAS UDAYANA",
+    "abstrak": "Pemilihan jalur peminatan atau penjaluran yang dilaksanakan di Program Studi Informatika Universitas Udayana bertujuan untuk mengembangkan kemampuan akademik mahasiswa menjadi lebih baik dengan mempelajari secara mendalam mata kuliah yang ada pada konsentrasinya. Penelitian ini menyajikan sebuah sistem pendukung keputusan berbasis website dengan menggunakan metode K-Nearest Neighbor (K-NN) yang digunakan untuk membantu mahasiswa dalam memilih jalur peminatan berdasarkan nilai matakuliah yang telah diambil pada semester sebelumnya. Variabel yang digunakan pada penelitian ini adalah nilai mahasiswa pada mata kuliah yang telah ditempuh sebelumnya karena nilai merupakan salah stau variabel yang paling pasti untuk menunjukan kompetensi seseorang. Dalam penelitian ini pula digunakan pengujian black box dan white box testing beserta pengukuran nilai akurasi K terbaik pada sistem. Hasil dari pengukuran nilai akurasi K terbaik dari sistem mendapatkan K dengan nilai K=7 adalah 60,7%. Nilai tersebut lebih tinggi dari K dengan nilai lainnya. Kata kunci : Sistem Pendukung Keputusan, K-Nearest Neighbor, Jalur Peminatan, Rekomendasi, Mata Kuliah",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00002.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1btBuZbNzyqnIIT6ObRMb1lR0D8ZtFErl/view"
+    }
+  },
+  "DOC_00003": {
+    "nim": "1908561040",
+    "nama_mahasiswa": "BERLIN PRATAMA",
+    "judul": "KLASIFIKASI GENRE MUSIK MENGGUNAKAN METODE CONVOLUTIONAL NEURAL NETWORK (CNN)",
+    "abstrak": "Genre adalah cara paling umum untuk mengkategorikan musik dalam database musik. Dalam pelabelan, genre musik yang tersimpan pada database ditentukan secara manual oleh seorang atau beberapa ahli yang tentu saja memakan banyak waktu. Musik bisa diakses dengan mudah melalui internet, baik dengan membeli dari aplikasi musik berbayar atau dengan mengunduh secara gratis. Musik digital juga digunakan oleh radio untuk memutar program. Musik diputar berdasarkan tema tertentu, seperti program musik klasik atau jazz. Radio membutuhkan klasifikasi genre musik agar mudah menemukan musik yang cocok untuk diputar dalam program. Dalam penelitian ini, akan dilakukan klasifikasi genre musik menggunakan Convolutional Neural Network (CNN). Klasifikasi genre menggunakan 3 jenis genre dengan jumlah 300 data. Diantaranya masing-masing 100 data untuk genre jazz, klasik, dan country. Data 3 buah genre dibagi menjadi data training 90% testing 10%. Klasifikasi genre musik terdiri dari tahap preprocessing, tahap perancangan arsitektur dengan dropout, tahap training model, testing model, tahap deploying model ke dalam web. Berdasarkan penelitian yang dilakukan mendapatkan hasil akurasi klasifikasi genre menggunakan metode CNN sebesar 91,67% sehingga hasil klasifikasi genre musik jazz, klasik, dan country tergolong baik. Kata Kunci : Klasifikasi, Genre, Musik, Web, Convolutional Neural Network",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00003.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1eA2j0h2k7syVtuyYRB0mW0LpuG8oNcjm/view"
+    }
+  },
+  "DOC_00004": {
+    "nim": "1908561093",
+    "nama_mahasiswa": "Anak Agung Gede Agung Angga Aditya",
+    "judul": "PENERAPAN TEKNOLOGI BLOCKCHAIN PADA E-WALLET UNTUK MENGAMANKAN TRANSAKSI BERBASIS WEBSITE",
+    "abstrak": "Penerapan system pembayaran secara elektronik atau e-wallet yang menggunakan pengamanan tradisional memiliki beberapa masalah seperti kebocoran data. Sistem pembayaran elektronik juga rentan terhadap pembobolan yang dapat merugikan penggunanya. Karena sifat terpusat atau centralized menjadi kelemahan pada sistem yang dimana jika orang yang tidak bertanggung jawab dari dalam perusahaan maupun luar perusahaan akan mendapatkan banyak data jika berhasil membobol sistem tersebut. Blockchain adalah buku besar terdistribusi, dimana setiap pihak dalam jaringan blockchain memiliki derajat yang sama. Data yang tersimpan pada blockchain mustahil diubah dan memiliki keunggulan yaitu sifat blockchain yang decentralized atau tidak ada otoritas yang memegang kendali penuh. Dengan algoritma konsensu blockchain dapat memvalidasi sebuah block baru yang akan masuk dan membaca semua data blockchain seperti sebuah catatan pada buku besar. Kata Kunci : Blockchain, E-wallet, Golang, React.Js, javaScript",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00004.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1-5_7g8UPgGodZJcdqKc4gxJWNmhYICFn/view"
+    }
+  },
+  "DOC_00005": {
+    "nim": "1908561008",
+    "nama_mahasiswa": "GENALDY SEPTIANTO MBUIK",
+    "judul": "SISTEM MONITORING KECEPATAN ANGIN BERBASIS JARINGAN SENSOR NIRKABEL UNTUK MEMPREDIKSI KESELAMATAN BERLAYAR PERAHU NELAYAN",
+    "abstrak": "Pengukuran kecepatan angin di perairan laut sangat penting dalam memprediksi keselamatan perahu nelayan. Dalam penelitian ini, digunakan alat pengukur kecepatan angin yang terdiri dari sensor anemometer dan mikrokontroler Arduino. Data kecepatan angin diperoleh dari sensor anemometer dan diproses oleh Arduino untuk dikirimkan ke monitor LCD sebagai output. Selain itu, data kecepatan angin juga dapat disimpan dalam bentuk file csv untuk diteliti lebih lanjut. Dalam penelitian ini, dilakukan pengujian alat pengukur kecepatan angin dengan membandingkan hasil pengukuran dengan alat pengukur kecepatan angin lainnya. Hasil pengujian menunjukkan bahwa alat pengukur kecepatan angin yang dibangun dapat memberikan hasil pengukuran yang akurat dan dapat diandalkan untuk menentukan tinggi gelombang yang dihasilkan untuk diklasifikasi tingkat keamanan bagi perahu nelayan. Dalam aplikasinya, alat pengukur kecepatan angin dapat digunakan untuk memprediksi kondisi cuaca dan keselamatan perahu nelayan di perairan laut. Kata Kunci: Kecepatan Angin, Arduino, Anemometer, Keamanan Berlayar, Perahu Nelayan",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00005.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1dw2aNBpbJ5H5qjkKFYMeuGddzu1DxHUG/view"
+    }
+  },
+  "DOC_00006": {
+    "nim": "1908561031",
+    "nama_mahasiswa": "NI PUTU AYU TRIANA",
+    "judul": "REKOMENDASI PROMOSI PENJUALAN PADA E-COMMERCE DENGAN SEGMENTASI LOYALITAS PELANGGAN MENGGUNAKAN FUZZY C-MEANS DAN KOEFISIEN SILHOUETTE",
+    "abstrak": "Kegagalan dalam menjalankan usaha dapat membuat operasional usaha berhenti, kehilangan pekerjaan bagi beberapa orang, serta penurunan fase hidup menjadi pailit. Untuk menghindari masalah tersebut, para pelaku usaha merancang strategi komunikasi pemasaran yang cocok dengan usaha yang dijalankan, salah satunya dengan menggunakan e-commerce. Akan tetapi, penggunaan e-commerce untuk meningkatkan pemasaran tidak selamanya memiliki hasil yang baik karena pemanfaatannya yang kurang maksimal. Banyak pelaku bisnis yang melakukan penyeragaman promosi penjualan dalam e-commerce, sehingga sasaran pemasaran pada pelanggan tidak tercapai dengan maksimal. Oleh karena itu, pelaku bisnis membutuhkan segmentasi loyalitas pelanggan agar dapat memberikan rekomendasi promosi penjualan yang cocok dalam e-commerce. Pencarian segmentasi loyalitas pelanggan dapat dilakukan menggunakan algoritma machine learning. Pada penelitian ini, dilakukan segmentasi loyalitas pelanggan menggunakan kolaborasi algoritma Fuzzy C-Means dengan Koefisien Silhouette dengan menggunakan data dari e-commerce Olist Store mulai tahun 2016 – 2018. Hasil penelitian mendapatkan tingkat DBI (Davied-Bouldin Index) yang terbaik berada pada nilai 0.36, dimana hasil tersebut merupakan hasil yang baik dengan arti bahwa jarak inter-klaster yang didapat telah memiliki nilai semaksimal mungkin dan jarak antar klaster telah seminimum mungkin sehingga karakteristik masing-masing klaster terlihat dengan jelas, dimana hasil terbaik ini didapat ketika melakukan pengelompokkan data sebanyak 2 klaster. Berdasarkan hasil tersebut, didapatkan hasil analisis segmentasi loyalitas pelanggan dan rekomendasi promosi penjualan yaitu kelompok pelanggan “High Value New Customers” dengan rekomendasi promosi dalam bentuk buy one get one free dan cashback dan kelompok pelanggan “Low Consumption Cost Customers” dengan rekomendasi promosi penjualan dalam bentuk bonus packs dan kupon. Kata kunci: E-commerce, Segmentasi Loyalitas Pelanggan, Promosi Penjualan, Rekomendasi, Fuzzy C-Means, Koefisien Silhouette",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00006.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1btb_-XcMeLbcMFf8VBnB-uDvdXjl6vX7/view"
+    }
+  },
+  "DOC_00007": {
+    "nim": "1908561073",
+    "nama_mahasiswa": "FIRMAN ALI EKA ATMOJO",
+    "judul": "PENERAPAN METODE YOU ONLY LOOK ONCE PADA APLIKASI PEMANTAUAN KENDARAAN PADA LAHAN PARKIR TERBUKA BERBASIS MOBILE",
+    "abstrak": "Dengan meningkatnya jumlah penduduk suatu kota akan menyebabkan meningkatnya kebutuhan untuk melakukan berbagai macam kegiatan. Oleh karena itu, seringkali timbul antrian yang disebabkan penumpukan kendaraan yang mencari lahan parkir. Di beberapa lahan parkir, metode deteksi tradisional dengan menggunakan sensor digunakan sebagai media untuk menentukan keadaan berbagai ruang. Metode ini membutuhkan instalasi dan pemeliharaan sensor yang menghabiskan biaya yang cukup mahal. Untuk mengurangi biaya tersebut, deteksi objek menggunakan deep learning dan computer vision dapat menjadi salah satu solusi untuk mendapatkan data ketersediaan lahan parkir tanpa kehilangan waktu deteksi. Pada penelitian ini, dibangun sebuah sistem yang digunakan untuk mendeteksi kendaraan pada lahan parkir terbuka menggunakan metode You Only Look Once dengan data latih menggunakan dataset 2017 MIOvision Traffic Camera Dataset Localization yang berjumlah 2.000 data dengan kelas bus, mobil, dan truk pickup. Sistem pemantauan dibuat dengan kamera yang dipasang di tempat parkir dengan sudut kemiringan 45 derajat, kemudian data dapat dilihat melalui perangkat mobile Android. Hasil dari pengujian beberapa model YOLOv5 menggunakan data uji berupa gambar pada lahan parkir didapatkan nilai akurasi sebesar 93,75%. Model terbaik diperoleh dari parameter learning rate sebesar 0,0001, batch size 48, dan epoch 200. Dalam beberapa pengujian, hasil deteksi pada gambar di malam hari mendapatkan nilai confidence yang kecil, sedangkan pada gambar yang ditingkatkan kecerahannya hasil deteksi kurang akurat, namun nilai confidence dari objek yang berhasil dideteksi meningkat. Hasil deteksi pada sistem pemantauan juga dapat berjalan dengan waktu deteksi 0,5 ms. Aplikasi dapat berjalan dengan baik yang ditunjukkan dengan hasil pengujian UAT terhadap 42 responden dengan persentase sebesar 92,76%. Kata kunci: Deteksi Objek, Kendaraan, Lahan Parkir, Deep Learning, Computer Vision, You Only Look Once, Mobile, Android, UAT.",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00007.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1e-dPusT7e8yMI-d7fr1UBB9d3tCSeCT-/view"
+    }
+  },
+  "DOC_00008": {
+    "nim": "1908561105",
+    "nama_mahasiswa": "GDE AGUNG MANDALA BENDESA",
+    "judul": "SISTEM REKOMENDASI WISATA KOPI DI BALI DENGAN USER-CENTERED DESIGN DAN ATOMIC DESIGN BERBASIS WEB",
+    "abstrak": "Pariwisata merupakan salah satu sektor yang ikut berperan dalam usaha peningkatan pendapatan. Menurut penelitian, kopi berada di urutan ke-tiga produk minuman yang paling banyak dikonsumsi di dunia setelah air mineral dan teh. Terdapat sebuah penelitian yang menyebutkan bahwa sulit untuk mempromosikan produk kopi yang sudah ada dan mengembangkan produk kopi tersebut. Sudah terdapat penelitian-penelitian sebelumnya yang mengupayakan berbagai metode untuk membantu mempromosikan wisata kopi yang sudah ada. Namun, belum ada penelitian yang menggunakan User Centered Design, Atomic Design, dan Analytical Hierarchy Process (AHP) sebagai metode pembantu pembuatan sistem untuk mempromosikan wisata kopi. Penelitian ini menggunakan metode tersebut untuk menyelesaikan permasalahan di lapangan, dan ditemukan bahwa pembuatan sistem dapat 54,78% lebih cepat menggunakan Atomic Design, serta didapatkan umpan balik dari pengguna melalui pengujian usability dengan rata-rata persentase tertinggi dari indikator Learnability pada bobot ke-4 (setuju) sebesar 50,75%, indikator memoralbility pada bobot ke-4 (setuju) sebesar 45,45%, indikator Efficiency pada bobot ke-4 (setuju) sebesar 54,5%, indikator Errors pada bobot ke-5 (setuju) sebesar 63,65%, dan indikator Satisfaction pada bobot ke-4 (setuju) sebesar 69,85%. Dalam hal User Centered Design ditemukan bahwa pengguna pada umumnya menanggapi positif terhadap sistem informasi. Kata kunci: Pariwisata, User Centered Design, Atomic Design, Analytical Hierarchy Process (AHP).",
+    "tahun": 2023,
+    "txt_path": "txt_docs/DOC_00008.txt",
+    "pdf": {
+      "type": "drive",
+      "url": "https://drive.google.com/file/d/1j_nSVXSw2cyhS8L9vzq_vvDRIU-CLucD/view"
+    }
+  }
+}

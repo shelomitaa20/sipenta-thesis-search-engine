@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>SIPENTA – Sistem Pencarian Tugas Akhir</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    {% if query %}
+    <header class="site-header">
+        <div class="header-inner">
+            <!-- kiri -->
+            <div class="header-left">
+                <img src="{{ url_for('static', filename='img/header_sipenta.png') }}"
+                    alt="SIPENTA"
+                    class="header-logo">
+            </div>
+
+            <!-- kanan -->
+            <nav class="header-nav">
+                <a href="{{ url_for('index') }}" class="nav-link">
+                    Beranda
+                </a>
+                <a href="#" class="nav-link">
+                    Tentang
+                </a>
+            </nav>
+        </div>
+    </header>
+    {% endif %}
+
+    <div class="container {% if not query %}centered{% endif %}">
+        {% if not query %}
+        <div class="logo-wrapper">
+            <img src="{{ url_for('static', filename='img/logo_sipenta.png') }}"
+                alt="SIPENTA"
+                class="logo-img">
+        </div>
+        {% endif %}
+
+        <form method="POST" class="search-box">
+            <div class="search-wrapper">
+                <input type="text" name="query" id="searchInput"
+                    placeholder="Cari judul, topik, atau nama penulis..."
+                    value="{{ query }}" autocomplete="off">
+                <div id="suggestions"></div>
+            </div>
+
+            <button type="submit" class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+
+        {% if query %}
+        <div class="result-header">
+            <p class="result-info">
+                Menampilkan hasil untuk <b>"{{ query }}"</b>
+                ({{ total_results }} dokumen)
+            </p>
+
+            <form method="POST" class="filter-inline">
+                <input type="hidden" name="query" value="{{ query }}">
+
+                <select name="year" onchange="this.form.submit()">
+                    <option value="all">Semua Tahun</option>
+                    {% for y in years %}
+                    <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>
+                        {{ y }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <select name="sort" onchange="this.form.submit()">
+                    <option value="relevance" {% if sort_by == "relevance" %}selected{% endif %}>
+                        Relevansi
+                    </option>
+                    <option value="year" {% if sort_by == "year" %}selected{% endif %}>
+                        Tahun Terbaru
+                    </option>
+                </select>
+            </form>
+        </div>
+
+        <div class="result-suggestion">
+            {% if suggestion %}
+            <p class="suggestion-text">
+                Apakah maksud Anda
+                <a href="#" id="didYouMean">{{ suggestion }}</a>?
+            </p>
+            {% endif %}
+        </div>
+
+        <table class="result-table">
+            <thead>
+                <tr>
+                    <th>Judul Tugas Akhir</th>
+                    <th>Penulis</th>
+                    <th>Tahun</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in results %}
+                <tr>
+                    <td class="judul">
+                        <a href="{{ url_for('detail', docid=r.docid, q=query) }}"
+                            class="judul-link">
+                                {{ r.judul }}
+                        </a>
+                    </td>
+                    <td>{{ r.nama }}</td>
+                    <td>{{ r.tahun }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {% if page > 1 %}
+                <a class="page-btn" href="?page={{ page-1 }}">«</a>
+            {% else %}
+                <span class="page-btn disabled">«</span>
+            {% endif %}
+
+            {% for p in range(1, total_pages + 1) %}
+                {% if p == page %}
+                    <span class="page-btn active">{{ p }}</span>
+                {% else %}
+                    <a class="page-btn" href="?page={{ p }}">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page < total_pages %}
+                <a class="page-btn" href="?page={{ page+1 }}">»</a>
+            {% else %}
+                <span class="page-btn disabled">»</span>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script> highlightKeywords("{{ query }}");</script>
+
+    <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
+
+    <script>
+    function submitSuggestion(q) {
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/";
+
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "query";
+        input.value = q;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const didYouMean = document.getElementById("didYouMean");
+        const input = document.getElementById("searchInput");
+
+        if (didYouMean) {
+            didYouMean.addEventListener("click", function (e) {
+                e.preventDefault();
+                input.value = didYouMean.textContent;
+                input.form.submit();   
+            });
+        }
+    });
+    </script>
+</body>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p>
+            © {{ 2025 }} <b>SIPENTA</b> — Sistem Pencarian Tugas Akhir
+        </p>
+        <p class="footer-sub">
+            Program Studi Informatika • Universitas Udayana
+        </p>
+    </div>
+</footer>
+
+</html>
