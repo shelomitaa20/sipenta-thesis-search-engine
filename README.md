@@ -1,7 +1,7 @@
 # SIPENTA – Thesis Search Engine
 **An Academic Information Retrieval System for Undergraduate Theses**
 
-SIPENTA (*Sistem Pencarian Tugas Akhir*) is an **academic search engine** designed to assist users in retrieving undergraduate thesis documents efficiently based on titles, topics, or keywords.
+SIPENTA (*Sistem Pencarian Tugas Akhir*) is an **academic search engine** designed to assist users in retrieving undergraduate thesis documents efficiently based on titles, topics, or keywords. Due to privacy considerations, the original thesis data (metadata_clean.json, inverted_index.json, trigram_index_pkl) is not included in this repository.
 
 ---
 
