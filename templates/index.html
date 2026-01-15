@@ -1,193 +1,216 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="h-full">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIPENTA – Sistem Pencarian Tugas Akhir</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/highlight.js') }}"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .highlight {
+            background-color: #dbeafe;    
+            color: #1e40af;              
+            padding: 0.1em 0.2em;
+            border-radius: 0.375rem;       
+            font-weight: 600;
+        }
+    </style>
 </head>
-
-<body>
+<body class="h-full bg-gray-50 flex flex-col">
+    <!-- Header -->
     {% if query %}
-    <header class="site-header">
-        <div class="header-inner">
-            <!-- kiri -->
-            <div class="header-left">
-                <img src="{{ url_for('static', filename='img/header_sipenta.png') }}"
-                    alt="SIPENTA"
-                    class="header-logo">
-            </div>
-
-            <!-- kanan -->
-            <nav class="header-nav">
-                <a href="{{ url_for('index') }}" class="nav-link">
-                    Beranda
-                </a>
-                <a href="#" class="nav-link">
-                    Tentang
-                </a>
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <a href="{{ url_for('index') }}" class="flex items-center">
+                <img src="{{ url_for('static', filename='img/header_sipenta.png') }}" alt="SIPENTA" class="h-10">
+            </a>
+            <nav class="flex gap-8">
+                <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-blue-600 font-medium transition">Beranda</a>
+                <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">Tentang</a>
             </nav>
         </div>
     </header>
     {% endif %}
 
-    <div class="container {% if not query %}centered{% endif %}">
+    <!-- Main Content -->
+    <main class="flex-1 container max-w-5xl mx-auto px-4 py-8">
+        <!-- Logo di halaman utama -->
         {% if not query %}
-        <div class="logo-wrapper">
-            <img src="{{ url_for('static', filename='img/logo_sipenta.png') }}"
-                alt="SIPENTA"
-                class="logo-img">
+        <div class="text-center mb-0">
+            <img src="{{ url_for('static', filename='img/logo_sipenta.png') }}" 
+                alt="SIPENTA" 
+                class="mx-auto max-w-full h-auto w-auto max-h-72">  
         </div>
         {% endif %}
 
-        <form method="POST" class="search-box">
-            <div class="search-wrapper">
-                <input type="text" name="query" id="searchInput"
+        <!-- Search Form -->
+        <form method="POST" class="max-w-3xl mx-auto mb-10 relative">  
+            <div class="relative flex items-center shadow-lg rounded-full overflow-hidden bg-white">
+                <input 
+                    type="text" 
+                    name="query" 
+                    id="searchInput"
+                    value="{{ query }}" 
+                    autocomplete="off"
                     placeholder="Cari judul, topik, atau nama penulis..."
-                    value="{{ query }}" autocomplete="off">
-                <div id="suggestions"></div>
+                    class="w-full px-6 py-4 text-lg outline-none"
+                >
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-r-full transition">
+                    <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                </button>
             </div>
 
-            <button type="submit" class="search-btn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
+            <!-- Suggestion -->
+            <div id="suggestions" class="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-b-2xl shadow-lg z-50 hidden max-h-96 overflow-y-auto"></div>
         </form>
 
-        {% if query %}
-        <div class="result-header">
-            <p class="result-info">
-                Menampilkan hasil untuk <b>"{{ query }}"</b>
-                ({{ total_results }} dokumen)
-            </p>
-
-            <form method="POST" class="filter-inline">
-                <input type="hidden" name="query" value="{{ query }}">
-
-                <select name="year" onchange="this.form.submit()">
-                    <option value="all">Semua Tahun</option>
-                    {% for y in years %}
-                    <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>
-                        {{ y }}
-                    </option>
-                    {% endfor %}
-                </select>
-
-                <select name="sort" onchange="this.form.submit()">
-                    <option value="relevance" {% if sort_by == "relevance" %}selected{% endif %}>
-                        Relevansi
-                    </option>
-                    <option value="year" {% if sort_by == "year" %}selected{% endif %}>
-                        Tahun Terbaru
-                    </option>
-                </select>
-            </form>
-        </div>
-
-        <div class="result-suggestion">
-            {% if suggestion %}
-            <p class="suggestion-text">
-                Apakah maksud Anda
-                <a href="#" id="didYouMean">{{ suggestion }}</a>?
-            </p>
-            {% endif %}
-        </div>
-
-        <table class="result-table">
-            <thead>
-                <tr>
-                    <th>Judul Tugas Akhir</th>
-                    <th>Penulis</th>
-                    <th>Tahun</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for r in results %}
-                <tr>
-                    <td class="judul">
-                        <a href="{{ url_for('detail', docid=r.docid, q=query) }}"
-                            class="judul-link">
-                                {{ r.judul }}
-                        </a>
-                    </td>
-                    <td>{{ r.nama }}</td>
-                    <td>{{ r.tahun }}</td>
-                </tr>
+        <!-- Tugas Akhir Terbaru -->
+        {% if not query %}
+        <section class="mt-16 mb-12">
+            <h2 class="text-xl font-bold text-gray-900 mb-6 text-center">Tugas Akhir Terbaru</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for thesis in recent_theses %}
+                <!-- card -->
+                <a href="{{ url_for('detail', docid=thesis.docid) }}" 
+                class="bg-white rounded-xl shadow-sm hover:shadow-xl hover:scale-105 transition-all duration-300 ease-in-out border border-gray-200 p-6 flex flex-col justify-between group">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-700">{{ thesis.judul }}</h3>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600 mt-auto">
+                        <span><i class="fa-solid fa-user mr-1"></i>{{ thesis.nama }}</span>
+                        <span><i class="fa-solid fa-calendar mr-1"></i>{{ thesis.tahun }}</span>
+                    </div>
+                </a>
                 {% endfor %}
-            </tbody>
-        </table>
+            </div>
+           <div class="text-center mt-8">
+                <a href="#" 
+                class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition shadow-md">
+                    <span>Lihat Semua Tugas Akhir</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Results Section -->
+        {% if query %}
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-1">
+            <p class="text-gray-700">
+                Menampilkan <strong>{{ total_results }}</strong> hasil untuk <strong class="text-blue-600">"{{ query }}"</strong>
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <!-- Filter Tahun -->
+                <form method="GET" class="flex items-center gap-2">
+                    <input type="hidden" name="query" value="{{ query }}">
+                    <input type="hidden" name="sort" value="{{ sort_by }}">
+                    <select name="year" onchange="this.form.submit()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                        <option value="all" {% if selected_year == 'all' %}selected{% endif %}>Semua Tahun</option>
+                        {% for y in years %}
+                        <option value="{{ y }}" {% if y == selected_year %}selected{% endif %}>{{ y }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+
+                <!-- Sort -->
+                <form method="GET" class="flex items-center gap-2">
+                    <input type="hidden" name="query" value="{{ query }}">
+                    <input type="hidden" name="year" value="{{ selected_year if selected_year != 'all' else '' }}">
+                    <select name="sort" onchange="this.form.submit()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                        <option value="relevance" {% if sort_by == "relevance" %}selected{% endif %}>Relevansi</option>
+                        <option value="year" {% if sort_by == "year" %}selected{% endif %}>Tahun Terbaru</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <!-- Suggestion -->
+        {% if suggestion %}
+        <p class="text-sm text-gray-600 mb-6">
+            Apakah maksud Anda <a href="{{ url_for('index', query=suggestion, year=selected_year if selected_year != 'all' else None, sort=sort_by if sort_by != 'relevance' else None) }}" 
+               class="text-blue-600 font-medium hover:underline">{{ suggestion }}</a>?
+        </p>
+        {% endif %}
+
+        <!-- Results Cards -->
+        <div class="space-y-4 mb-10">
+            {% for r in results %}
+            <a href="{{ url_for('detail', docid=r.docid, q=query) }}" 
+               class="block bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 p-5 hover:border-blue-300 group">
+                <h3 class="text-l font-bold text-gray-900 mb-4 tracking-wide group-hover:text-blue-600 transition judul">
+                    {{ r.judul|upper }}
+                </h3>
+                
+                <!-- Info -->
+                <div class="flex flex-wrap items-center gap-6 text-base text-gray-700">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-user text-blue-600"></i>
+                        <span class="font-medium">{{ r.nama|title }}</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-calendar text-blue-600"></i>
+                        <span class="font-medium">{{ r.tahun }}</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
 
         <!-- Pagination -->
-        <div class="pagination">
+        {% if total_pages > 1 %}
+        <div class="flex justify-center items-center gap-3 mt-12">
             {% if page > 1 %}
-                <a class="page-btn" href="?page={{ page-1 }}">«</a>
-            {% else %}
-                <span class="page-btn disabled">«</span>
+                <a href="{{ url_for('index', page=page-1, **current_params) }}" 
+                   class="px-5 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition">« Sebelumnya</a>
             {% endif %}
 
-            {% for p in range(1, total_pages + 1) %}
+            {% for p in page_range %}
                 {% if p == page %}
-                    <span class="page-btn active">{{ p }}</span>
+                    <span class="px-5 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow">{{ p }}</span>
                 {% else %}
-                    <a class="page-btn" href="?page={{ p }}">{{ p }}</a>
+                    <a href="{{ url_for('index', page=p, **current_params) }}" 
+                       class="px-5 py-3 bg-gray-200 hover:bg-blue-100 hover:border-blue-400 border rounded-lg transition">{{ p }}</a>
                 {% endif %}
             {% endfor %}
 
             {% if page < total_pages %}
-                <a class="page-btn" href="?page={{ page+1 }}">»</a>
-            {% else %}
-                <span class="page-btn disabled">»</span>
+                <a href="{{ url_for('index', page=page+1, **current_params) }}" 
+                   class="px-5 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition">Selanjutnya »</a>
             {% endif %}
         </div>
         {% endif %}
-    </div>
+        {% endif %}
+    </main>
 
-    <script> highlightKeywords("{{ query }}");</script>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-600">
+            <p>© {{ 2025 }} <strong>SIPENTA</strong> — Sistem Pencarian Tugas Akhir</p>
+            <p class="mt-1">Program Studi Informatika • Universitas Udayana</p>
+        </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
+    <script>highlightKeywords("{{ query }}");</script>
 
     <script>
-    function submitSuggestion(q) {
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = "/";
-
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = "query";
-        input.value = q;
-
-        form.appendChild(input);
-        document.body.appendChild(form);
-        form.submit();
-    }
-    </script>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const didYouMean = document.getElementById("didYouMean");
-        const input = document.getElementById("searchInput");
-
-        if (didYouMean) {
-            didYouMean.addEventListener("click", function (e) {
-                e.preventDefault();
-                input.value = didYouMean.textContent;
-                input.form.submit();   
-            });
-        }
-    });
+        document.getElementById("didYouMean")?.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.getElementById("searchInput").value = this.textContent;
+            document.querySelector("form").submit();
+        });
     </script>
 </body>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <p>
-            © {{ 2025 }} <b>SIPENTA</b> — Sistem Pencarian Tugas Akhir
-        </p>
-        <p class="footer-sub">
-            Program Studi Informatika • Universitas Udayana
-        </p>
-    </div>
-</footer>
-
 </html>

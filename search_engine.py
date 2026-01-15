@@ -3,6 +3,12 @@ import math
 from collections import Counter
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
+def extract_keywords_from_abstract(abstrak_text):
+    if not abstrak_text:
+        return ""
+    match = re.search(r'kata\s*kunci\s*:\s*(.+)', abstrak_text, re.I | re.S)
+    return match.group(1).strip() if match else ""
+
 # =========================
 # STEMMER
 # =========================
@@ -80,9 +86,6 @@ def or_query(terms, inverted_index):
 
 
 def phrase_query(phrase_terms, inverted_index):
-    """
-    Mengecek apakah term muncul berurutan dalam dokumen yang sama
-    """
     if any(t not in inverted_index for t in phrase_terms):
         return set()
 
@@ -272,60 +275,40 @@ def rank_documents(query, candidate_docs, inverted_index, idf):
 # =========================
 
 def search_and_rank(query, inverted_index, trigram_index, N, mode="AND"):
-    # =========================
-    # 1. PREPROCESS QUERY
-    # =========================
-    query_tokens = preprocess_query(query)
-    if not query_tokens:
-        return [], None
-
+    # 1. Preprocess query asli
+    original_tokens = preprocess_query(query)
     dictionary_terms = set(inverted_index.keys())
 
-    # =========================
-    # 2. CEK MISSPELLING (SEBELUM SEARCH)
-    # =========================
-    has_misspelled = any(t not in dictionary_terms for t in query_tokens)
+    # 2. Cek apakah ada misspelling
+    misspelled = [t for t in original_tokens if t not in dictionary_terms]
+    has_misspelled = bool(misspelled)
 
     suggestion = None
+    corrected_query = query  
+
+    # 3. Jika ada misspelling, maka generate suggestion
     if has_misspelled:
-        suggestion = suggest_query(
-            query,
-            trigram_index,
-            dictionary_terms
-        )
+        suggestion = suggest_query(query, trigram_index, dictionary_terms)
+        if suggestion:
+            corrected_query = suggestion
 
-    # =========================
-    # 3. SEARCH (BOOLEAN / PHRASE / TOLERANT)
-    # =========================
-    candidate_docs = search(query, inverted_index, trigram_index, mode)
+    # 4. Search 
+    candidate_docs = search(corrected_query, inverted_index, trigram_index, mode)
 
+    # 5. Fallback: jika hasil kosong dan ada suggestion, pakai query asli
+    if not candidate_docs and has_misspelled:
+        candidate_docs = search(query, inverted_index, trigram_index, mode)
+
+    # 6. Jika masih kosong → return kosong + suggestion
     if not candidate_docs:
         return [], suggestion
 
-    # =========================
-    # 4. SINGLE TERM QUERY → TF
-    # =========================
-    if len(query_tokens) == 1:
-        term = query_tokens[0]
-        results = []
-
-        if term in inverted_index:
-            for docid, info in inverted_index[term].items():
-                results.append((docid, info["tf"]))
-
-        results.sort(key=lambda x: x[1], reverse=True)
-        return results, suggestion
-
-    # =========================
-    # 5. MULTI TERM → TF-IDF + COSINE
-    # =========================
+    # 7. Ranking TF-IDF + Cosine
     idf = compute_idf(inverted_index, N)
-    ranked_docs = rank_documents(query, candidate_docs, inverted_index, idf)
+    ranked_docs = rank_documents(corrected_query, candidate_docs, inverted_index, idf)
 
-    # =========================
-    # 6. FALLBACK JIKA COSINE = 0
-    # =========================
+    # 8. Fallback skor 0 jika cosine gagal 
     if not ranked_docs:
-        return [(docid, 0.0) for docid in candidate_docs], suggestion
+        ranked_docs = [(docid, 0.0) for docid in candidate_docs]
 
     return ranked_docs, suggestion

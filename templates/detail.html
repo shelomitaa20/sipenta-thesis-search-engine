@@ -2,92 +2,67 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>{{ doc.judul }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ doc.judul }} - SIPENTA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } } }
+    </script>
 </head>
-<body>
-
-<!-- ===== HEADER ===== -->
-<header class="site-header">
-    <div class="header-inner">
-        <!-- kiri -->
-        <div class="header-left">
-            <img src="{{ url_for('static', filename='img/header_sipenta.png') }}"
-                alt="SIPENTA"
-                class="header-logo">
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <a href="{{ url_for('index') }}" class="flex items-center">
+                <img src="{{ url_for('static', filename='img/header_sipenta.png') }}" alt="SIPENTA" class="h-10">
+            </a>
+            <nav class="flex gap-8">
+                <a href="{{ url_for('index') }}" class="text-gray-700 hover:text-blue-600 font-medium">Beranda</a>
+                <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Tentang</a>
+            </nav>
         </div>
+    </header>
 
-        <!-- kanan -->
-        <nav class="header-nav">
-            <a href="{{ url_for('index') }}" class="nav-link">
-                Beranda
-            </a>
-            <a href="#" class="nav-link">
-                Tentang
-            </a>
+    <main class="flex-1 container max-w-4xl mx-auto px-4 py-10">
+        <nav class="text-sm text-gray-600 mb-8">
+            <a href="{{ url_for('index') }}" class="text-blue-600 hover:underline">Laman Pencarian</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-800">Detail Dokumen</span>
         </nav>
-    </div>
-</header>
 
-<!-- ===== CONTENT ===== -->
-<div class="container detail-container">
-    <!-- ===== BREADCRUMBS ===== -->
-    <div class="breadcrumb">
-        <a href="{{ url_for('index', query=query) }}">
-            Laman Pencari
-        </a>
-        <span>/</span>
-        <span class="breadcrumb-current">{{ doc.judul }}</span>
-    </div>
+        <article class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ doc.judul|upper }}</h1>
+            <p class="text-lg text-gray-600 mb-8">
+                {{ doc.nama_mahasiswa }} • {{ doc.nim }} • {{ doc.tahun }}
+            </p>
 
-    <!-- JUDUL -->
-    <h1 class="detail-title">
-        {{ doc.judul.upper() }}
-    </h1>
+            {% if doc.kata_kunci %}
+            <section class="mb-10">
+                <h2 class="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-2">Kata Kunci</h2>
+                <p class="text-gray-800 italic">{{ doc.kata_kunci }}</p>
+            </section>
+            {% endif %}
 
-    <!-- PENULIS -->
-    <p class="detail-author">
-        {{ doc.nama_mahasiswa }} - {{ doc.nim }} - {{doc.tahun}}
-    </p>
+            <section class="mb-10">
+                <h2 class="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">Abstrak</h2>
+                <div class="text-gray-700 leading-relaxed text-justify">{{ doc.abstrak | safe }}</div>
+            </section>
 
-    <!-- KATA KUNCI -->
-    {% if doc.kata_kunci %}
-    <div class="detail-section">
-        <p class="section-label">Kata Kunci</p>
-        <p class="section-content keyword-text">
-            {{ doc.kata_kunci }}
-        </p>
-    </div>
-    {% endif %}
+            {% if doc.pdf %}
+            <a href="{{ doc.pdf.url }}" target="_blank" class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition">
+                <i class="fa-solid fa-file-pdf text-xl"></i>
+                Buka PDF
+            </a>
+            {% endif %}
+        </article>
+    </main>
 
-    <!-- ABSTRAK -->
-    <div class="detail-section">
-        <p class="section-label">Abstrak</p>
-        <p class="section-content abstrak-text">
-            {{ doc.abstrak | safe }}
-        </p>
-    </div>
-
-    <!-- BUTTON PDF -->
-    {% if doc.pdf %}
-    <a href="{{ doc.pdf.url }}" target="_blank" class="pdf-btn">
-        📄 PDF
-    </a>
-    {% endif %}
-
-</div>
-
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-    <div class="footer-inner">
-        <p>
-            © {{ 2025 }} <b>SIPENTA</b> — Sistem Pencarian Tugas Akhir
-        </p>
-        <p class="footer-sub">
-            Program Studi Informatika • Universitas Udayana
-        </p>
-    </div>
-</footer>
-
+    <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-600">
+            <p>© {{ 2025 }} <strong>SIPENTA</strong> — Sistem Pencarian Tugas Akhir</p>
+            <p class="mt-1">Program Studi Informatika • Universitas Udayana</p>
+        </div>
+    </footer>
 </body>
 </html>
